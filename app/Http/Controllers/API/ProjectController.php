@@ -17,7 +17,9 @@ class ProjectController extends Controller
     public function index(Request $request): JsonResponse
     {
         try {
-            $query = Project::with('creator');
+            $query = Project::with('creator')->withCount(['tasks' => function($q) {
+                $q->whereNull('deleted_at');
+            }]);
 
             if ($request->filled('name')) {
                 $query->where('name', 'ILIKE', '%' . $request->name . '%');
@@ -38,6 +40,7 @@ class ProjectController extends Controller
                     'status' => $project->status,
                     'created_at' => $project->created_at,
                     'updated_at' => $project->updated_at,
+                    'tasks_count' => $project->tasks_count,
                 ];
             });
 
@@ -121,6 +124,8 @@ class ProjectController extends Controller
                     'title' => $task->title,
                     'description' => $task->description,
                     'due_date' => $task->due_date,
+                    'category_id' => $task->category_id,
+                    'project_id' => $task->project_id,
                     'status' => $task->category->name,
                     'created_at' => $task->created_at,
                     'updated_at' => $task->updated_at,
