@@ -38,8 +38,16 @@ class TaskController extends Controller
             $data = $tasks->map(function ($task) {
                 return [
                     'id' => $task->id,
-                    'project' => $task->project->name,
-                    'category' => $task->category->name,
+                    'project_id' => $task->project_id,
+                    'category_id' => $task->category_id,
+                    'project' => [
+                        'id' => $task->project_id,
+                        'name' => $task->project->name,
+                    ],
+                    'category' => [
+                        'id' => $task->category_id,
+                        'name' => $task->category->name,
+                    ],
                     'created_by' => $task->creator->name,
                     'deleted_by' => $task->deletedBy?->name,
                     'title' => $task->title,
@@ -81,8 +89,16 @@ class TaskController extends Controller
             
             $data = [
                 'id' => $task->id,
-                'project' => $task->project->name,
-                'category' => $task->category->name,
+                'project_id' => $task->project_id,
+                'category_id' => $task->category_id,
+                'project' => [
+                    'id' => $task->project_id,
+                    'name' => $task->project->name,
+                ],
+                'category' => [
+                    'id' => $task->category_id,
+                    'name' => $task->category->name,
+                ],
                 'created_by' => $task->creator->name,
                 'deleted_by' => $task->deletedBy?->name,
                 'title' => $task->title,
@@ -116,8 +132,16 @@ class TaskController extends Controller
             
             $data = [
                 'id' => $task->id,
-                'project' => $task->project->name,
-                'category' => $task->category->name,
+                'project_id' => $task->project_id,
+                'category_id' => $task->category_id,
+                'project' => [
+                    'id' => $task->project_id,
+                    'name' => $task->project->name,
+                ],
+                'category' => [
+                    'id' => $task->category_id,
+                    'name' => $task->category->name,
+                ],
                 'created_by' => $task->creator->name,
                 'deleted_by' => $task->deletedBy?->name,
                 'title' => $task->title,
